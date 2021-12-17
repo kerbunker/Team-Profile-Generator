@@ -7,7 +7,7 @@ test('creates an Intern object', () => {
     expect(intern.name).toBe('Ben');
     expect(intern.id).toEqual(10278);
     expect(intern.email).toBe('Ben.intern@email.com');
-    expect(intern.github).toBe('NC State');
+    expect(intern.school).toBe('NC State');
 });
 
 test("gets intern's name", () => {
@@ -30,6 +30,6 @@ test("gets intern's school", () => {
 });
 
 test("gets intern's Role", () => {
-    expect(intern.getName()).toEqual('intern');
+    expect(intern.getRole()).toEqual('Intern');
 
 });

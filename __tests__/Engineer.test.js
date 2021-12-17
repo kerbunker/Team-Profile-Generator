@@ -7,7 +7,7 @@ test('creates an Engineer object', () => {
     expect(engineer.name).toBe('Owen');
     expect(engineer.id).toEqual(8725);
     expect(engineer.email).toBe('Owen@email.com');
-    expect(engineer.github).toBe('Owen-github');
+    expect(engineer.github).toBe('owen-github');
 });
 
 test("gets engineer's name", () => {
@@ -30,6 +30,6 @@ test("gets engineer's github username", () => {
 });
 
 test("gets engineer's Role", () => {
-    expect(engineer.getName()).toEqual('Engineer');
+    expect(engineer.getRole()).toEqual('Engineer');
 
 });

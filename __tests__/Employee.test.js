@@ -25,6 +25,6 @@ test("gets employee's email", () => {
 });
 
 test("gets employee's Role", () => {
-    expect(employee.getName()).toEqual('Employee');
+    expect(employee.getRole()).toEqual('Employee');
 
 });
