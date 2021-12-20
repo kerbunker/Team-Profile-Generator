@@ -17,8 +17,8 @@ const promptManager = () => {
             type: 'input',
             name: 'managerName',
             message: "What is the team manager's name? (Required)",
-            validate: managerNameInput => {
-                if (managerNameInput) {
+            validate: managerName => {
+                if (managerName) {
                     return true;
                 } else {
                     console.log("Please enter the team manager's name.");
@@ -56,8 +56,8 @@ const promptManager = () => {
             type: 'input',
             name: 'officeNum',
             message: "What is the manager's office number? (Required)",
-            validate: managerOffice => {
-                if(managerOffice) {
+            validate: officeNum => {
+                if(officeNum) {
                     return true;
                 } else {
                     console.log("Please enter the office number");
@@ -121,8 +121,8 @@ const addEngineer = () => {
             type: 'input',
             name: 'engineerName',
             message: "What is the Engineer's name? (Required)",
-            validate: nameInput => {
-                if (nameInput) {
+            validate: engineerName => {
+                if (engineerName) {
                     return true;
                 } else {
                     console.log("Please enter the engineer's name.");
@@ -170,8 +170,8 @@ const addEngineer = () => {
             } 
         }
     ])
-    .then(({name, id, email, github}) => {
-        const engineer = new Engineer(name, id, email, github);
+    .then(({engineerName, engineerId, engineerEmail, github}) => {
+        const engineer = new Engineer(engineerName, engineerId, engineerEmail, github);
 
         team.push(engineer);
 
@@ -234,8 +234,8 @@ const addIntern = () => {
             } 
         }
     ])
-    .then(({name, id, email, school}) => {
-        const intern = new Intern(name, id, email, school);
+    .then(({internName, internId, internEmail, internSchool}) => {
+        const intern = new Intern(internName, internId, internEmail, internSchool);
 
         team.push(intern);
 

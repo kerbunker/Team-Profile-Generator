@@ -1,11 +1,11 @@
 const Engineer = require('../lib/Engineer.js');
 
-const engineer = new Engineer('Owen', 8725, 'Owen@email.com', 'owen-github');
+const engineer = new Engineer('Owen', '8725', 'Owen@email.com', 'owen-github');
 
 test('creates an Engineer object', () => {
 
     expect(engineer.name).toBe('Owen');
-    expect(engineer.id).toEqual(8725);
+    expect(engineer.id).toBe('8725');
     expect(engineer.email).toBe('Owen@email.com');
     expect(engineer.github).toBe('owen-github');
 });
@@ -16,7 +16,7 @@ test("gets engineer's name", () => {
 });
 
 test("gets engineer's id", () => {
-    expect(engineer.getId()).toEqual(expect.stringContaining(engineer.id.toString()));
+    expect(engineer.getId()).toEqual(expect.stringContaining(engineer.id));
 });
 
 test("gets engineer's email", () => {

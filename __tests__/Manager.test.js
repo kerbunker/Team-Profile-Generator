@@ -1,11 +1,11 @@
 const Manager = require('../lib/Manager.js');
 
-const manager = new Manager('Diane', 3257, 'Diane@email.com', 15);
+const manager = new Manager('Diane', '3257', 'Diane@email.com', 15);
 
 test('creates a Manager object', () => {
 
     expect(manager.name).toBe('Diane');
-    expect(manager.id).toEqual(3257);
+    expect(manager.id).toBe('3257');
     expect(manager.email).toBe('Diane@email.com');
     expect(manager.officeNumber).toEqual(15);
 });
@@ -16,7 +16,7 @@ test("gets Manager's name", () => {
 });
 
 test("gets Manager's id", () => {
-    expect(manager.getId()).toEqual(expect.stringContaining(manager.id.toString()));
+    expect(manager.getId()).toEqual(expect.stringContaining(manager.id));
 });
 
 test("gets Manager's email", () => {
