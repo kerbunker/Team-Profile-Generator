@@ -4,6 +4,9 @@ const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 
+const generatePage = require('./src/generatePage');
+const fs = require('fs');
+
 //Array for team mamber objects
 const team = [];
 
@@ -63,8 +66,8 @@ const promptManager = () => {
             } 
         }
     ])
-    .then(({name, id, email, officeNum}) => {
-        const manager = new Manager(name, id, email, officeNum);
+    .then(({managerName, managerId, managerEmail, officeNum}) => {
+        const manager = new Manager(managerName, managerId, managerEmail, officeNum);
 
         team.push(manager);
 
@@ -168,10 +171,88 @@ const addEngineer = () => {
         }
     ])
     .then(({name, id, email, github}) => {
-        const engineer = new engineer(name, id, email, github);
+        const engineer = new Engineer(name, id, email, github);
 
         team.push(engineer);
 
         showMenu();
     })
 };
+
+const addIntern = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'internName',
+            message: "What is the Intern's name? (Required)",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the intern's name.");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internId',
+            message: "What is the intern's Id? (Required)",
+            validate: internId => {
+                if (internId) {
+                    return true;
+                } else {
+                    console.log("Please enter the intern's Id");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internEmail',
+            message: "What is the intern's email? (Required)",
+            validate: internEmail => {
+                if (internEmail) {
+                    return true;
+                } else {
+                    console.log("Please enter the email");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internSchool',
+            message: "What is the intern's school? (Required)",
+            validate: schoolInput => {
+                if(schoolInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the intern's school");
+                    return false;
+                }
+            } 
+        }
+    ])
+    .then(({name, id, email, school}) => {
+        const intern = new Intern(name, id, email, school);
+
+        team.push(intern);
+
+        showMenu();
+    })
+};
+
+const createPage = () => {
+    console.log("Team page created");
+    const teamPage = generatePage(team);
+
+    fs.writeFile('./dist/index.html', teamPage, err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    })
+};
+
+promptManager();
