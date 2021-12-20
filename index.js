@@ -1,13 +1,18 @@
+// Allows the use for the inquirer and fs packages
 const inquirer = require('inquirer');
+const fs = require('fs');
+
+// Requires the Classes for each employee type
 const Engineer = require('./lib/Engineer.js');
 const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 
+// Allows the use of the script file to generate the html
 const generatePage = require('./src/generatePage');
-const fs = require('fs');
 
-//Array for team mamber objects
+
+//Array for team member objects
 const team = [];
 
 // Ask the user for manager info
@@ -67,15 +72,18 @@ const promptManager = () => {
         }
     ])
     .then(({managerName, managerId, managerEmail, officeNum}) => {
+        // Creates a new manager object
         const manager = new Manager(managerName, managerId, managerEmail, officeNum);
-
+        // pushes the new manager onto the team array
         team.push(manager);
-
+        // calls the function to show the menu
         showMenu();
     })
 };
 
+// Function to show the menu of options
 const showMenu = () => {
+    // Asks user if they want to add another employee or just show the gnerated team page
     return inquirer.prompt(
         {
             type: 'confirm',
@@ -85,17 +93,19 @@ const showMenu = () => {
         }
     )
     .then (answer => {
+        // if the answer is yes, the function to add another employee is called
         if (answer.confirmAdd) {
-            console.log("Another employee is being added");
             addEmployee();
         } else {
-            console.log('Team page generated');
+            // if the answer is no, the team page html is generated
             createPage();
         }
     })
 };
 
+// Asks the user what type of employee they want to add
 const addEmployee = () => {
+    // Allows the user to chose from Engineer or Intern
     return inquirer.prompt(
         {
             type: 'list',
@@ -106,16 +116,22 @@ const addEmployee = () => {
     )
     .then(response => {
         if (response.employeeType === 'Engineer') {
+            // If the response is engineer, the function to create an engineer object is called
             addEngineer();
         } else if (response.employeeType === 'Intern') {
+            // If the option to add an intern is selected, the function to create an intern object is called
             addIntern();
         } else {
+            // if none is selected, the menu is displayed again
             showMenu();
         }
     });
 };
 
+// Function to add an engineer to the team
 const addEngineer = () => {
+
+    // Asks the user for the engineer's info
     return inquirer.prompt([
         {
             type: 'input',
@@ -171,15 +187,18 @@ const addEngineer = () => {
         }
     ])
     .then(({engineerName, engineerId, engineerEmail, github}) => {
+        // Creates a new engineer object with the given info
         const engineer = new Engineer(engineerName, engineerId, engineerEmail, github);
-
+        // adds the engineer to the team array
         team.push(engineer);
-
+        // goes back to the menu option to ask what the user wants to do next
         showMenu();
     })
 };
 
+// Function to add an intern to the team
 const addIntern = () => {
+    // Asks the user for the intern info
     return inquirer.prompt([
         {
             type: 'input',
@@ -235,14 +254,16 @@ const addIntern = () => {
         }
     ])
     .then(({internName, internId, internEmail, internSchool}) => {
+        // Creates a new object with the given info
         const intern = new Intern(internName, internId, internEmail, internSchool);
-
+        // adds the intern to the team
         team.push(intern);
-
+        // shows the menu options again
         showMenu();
     })
 };
 
+// Creates the html to show the team page
 const createPage = () => {
     console.log("Team page created");
     const teamPage = generatePage(team);
@@ -255,4 +276,5 @@ const createPage = () => {
     })
 };
 
+// Calls the function to start the user prompts
 promptManager();
