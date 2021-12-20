@@ -59,7 +59,7 @@ const generatePage = team => {
                             <ul class="list-group list-group-flush ">
                                 <li class="list-group-item border border-light rounded mb-2 fw-bold">ID: <span class="fw-normal">${id}</span></li>
                                 <li class="list-group-item border border-light rounded mb-2 fw-bold">Email: <a href="mailto:${email}" class="fw-normal">${email}</a></li>
-                                <li class="list-group-item border border-light rounded mb-2 fw-bold">GitHub: <a href="github.com/${github}" class="fw-normal">${github}</a></li>
+                                <li class="list-group-item border border-light rounded mb-2 fw-bold">GitHub: <a href="https://www.github.com/${github}" class="fw-normal">${github}</a></li>
                             </ul>
                         </div>
                     </div>
